@@ -20,42 +20,25 @@ public abstract class Communication {
     @Column(
             nullable = false
     )
-    private int serviceId;
 
-    @Column(
-            nullable = false,
-            columnDefinition = "DATE"
-    )
-    private LocalDate daySlot;
-
-    @Column(
-            nullable = false,
-            columnDefinition = "TIME"
-    )
-    private LocalTime timeSlot;
     private float hourlySalaryRate;
     private String postCode;
     private boolean active;
 
     @Column(
-            nullable = true,
             columnDefinition = "TEXT"
     )
     private String message;
 
-    public Communication(int serviceId, LocalDate daySlot, LocalTime timeSlot, float hourlySalaryRate, String postCode, boolean active, String message) {
-        this.serviceId = serviceId;
-        this.daySlot = daySlot;
-        this.timeSlot = timeSlot;
+    public Communication(float hourlySalaryRate, String postCode, boolean active, String message) {
         this.hourlySalaryRate = hourlySalaryRate;
         this.postCode = postCode;
         this.active = active;
         this.message = message;
     }
 
-    public Communication(long id, int serviceId, String postCode, String message) {
+    public Communication(long id, String postCode, String message) {
         this.id = id;
-        this.serviceId = serviceId;
         this.postCode = postCode;
         this.message = message;
     }
@@ -69,30 +52,6 @@ public abstract class Communication {
 
     public void setId(long id) {
         this.id = id;
-    }
-
-    public int getServiceId() {
-        return serviceId;
-    }
-
-    public void setServiceId(int serviceId) {
-        this.serviceId = serviceId;
-    }
-
-    public LocalDate getDaySlot() {
-        return daySlot;
-    }
-
-    public void setDaySlot(LocalDate daySlot) {
-        this.daySlot = daySlot;
-    }
-
-    public LocalTime getTimeSlot() {
-        return timeSlot;
-    }
-
-    public void setTimeSlot(LocalTime timeSlot) {
-        this.timeSlot = timeSlot;
     }
 
     public float getHourlySalaryRate() {
