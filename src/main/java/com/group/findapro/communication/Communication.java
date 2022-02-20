@@ -1,13 +1,11 @@
 package com.group.findapro.communication;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
-import java.time.LocalDate;
-import java.time.LocalTime;
+import javax.persistence.*;
 
 @MappedSuperclass
+//@Inheritance(
+//        strategy = InheritanceType.JOINED
+//)
 public abstract class Communication {
 
     @Id
@@ -23,6 +21,9 @@ public abstract class Communication {
 
     private float hourlySalaryRate;
     private String postCode;
+    @Column(
+            columnDefinition = "TEXT"
+    )
     private boolean active;
 
     @Column(
@@ -37,9 +38,8 @@ public abstract class Communication {
         this.message = message;
     }
 
-    public Communication(long id, String postCode, String message) {
+    public Communication(long id, String message) {
         this.id = id;
-        this.postCode = postCode;
         this.message = message;
     }
 
