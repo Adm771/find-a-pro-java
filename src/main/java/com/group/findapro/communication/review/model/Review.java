@@ -16,6 +16,15 @@ public class Review {
     private String message;
     private long customerId;
     private long handymanId;
+    private float rating;
+
+
+    public Review(String message, long customerId, long handymanId, float rating) {
+        this.message = message;
+        this.customerId = customerId;
+        this.handymanId = handymanId;
+        this.rating = rating;
+    }
 
     public Review(String message, long customerId, long handymanId) {
         this.message = message;
@@ -56,5 +65,13 @@ public class Review {
 
     public void setHandymanId(long handymanId) {
         this.handymanId = handymanId;
+    }
+
+    public float getRating() {
+        return rating;
+    }
+
+    public void setRating(float rating) {
+        this.rating = rating;
     }
 }

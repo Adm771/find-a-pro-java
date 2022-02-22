@@ -51,6 +51,18 @@ public class Request {
     private LocalTime timeSlot;
     private long customerId;
 
+    @Column(
+            nullable = true,
+            columnDefinition= "BIGINT default null"
+    )
+    private long handymanId;
+
+    @Column(
+            nullable = false,
+            columnDefinition= "BOOLEAN default false"
+    )
+    private boolean confirmed;
+
     public Request(float hourlySalaryRate, String postCode, boolean active, String message, int serviceId, LocalDate daySlot, LocalTime timeSlot, long customerId) {
         this.hourlySalaryRate = hourlySalaryRate;
         this.postCode = postCode;
@@ -135,5 +147,21 @@ public class Request {
 
     public void setCustomerId(long customerId) {
         this.customerId = customerId;
+    }
+
+    public long getHandymanId() {
+        return handymanId;
+    }
+
+    public void setHandymanId(long handymanId) {
+        this.handymanId = handymanId;
+    }
+
+    public boolean isConfirmed() {
+        return confirmed;
+    }
+
+    public void setConfirmed(boolean confirmed) {
+        this.confirmed = confirmed;
     }
 }
