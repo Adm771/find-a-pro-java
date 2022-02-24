@@ -20,10 +20,13 @@ public class OfferController {
     }
 
     @GetMapping
-    public List<Offer> getAllOffers(){
-        return offerService.getAllOffers();
-    }
+    public List<Offer> getAllOffers(){ return offerService.getAllOffers(); }
 
     @PostMapping
     public void addOffer(@RequestBody Offer newOffer) { offerService.addOffer(newOffer); }
+
+//    @GetMapping()
+//    public List<Offer> getOffersByserviceIdAndPostCode(@RequestParam int serviceId, @RequestParam String postCode){
+//        return offerService.getOffersByserviceIdAndPostCode(serviceId, postCode);
+//    }
 }

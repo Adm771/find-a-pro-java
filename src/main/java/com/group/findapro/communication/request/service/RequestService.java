@@ -23,5 +23,8 @@ public class RequestService {
         System.out.println(newRequest);
         requestRepository.save(newRequest);
     }
+
+//    public List<Request> getRequestsByCustomerId(Long customerId) { return requestRepository.findAllByCustomerId(customerId);
+//    }
 }
 
