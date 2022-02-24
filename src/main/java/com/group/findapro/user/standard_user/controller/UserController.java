@@ -44,7 +44,7 @@ public class UserController {
 
 
     // UPDATE USER widziałem tutaj @Valid przed request body ale nie działa obecnie wcale ten @
-    @PutMapping("/employees/{id}")
+    @PutMapping("/user/{id}")
     public ResponseEntity<User> updateEmployee(@PathVariable(value = "id") Long userId,
                                                @RequestBody User userDetails) throws ResourceNotFoundException {
         User user = userRepository.findById(userId)
