@@ -1,7 +1,7 @@
-package com.group.findapro.user.handyman.controller;
+package com.group.findapro.user.pro_user.controller;
 
-import com.group.findapro.user.handyman.model.Handyman;
-import com.group.findapro.user.handyman.service.HandymanService;
+import com.group.findapro.user.pro_user.model.Handyman;
+import com.group.findapro.user.pro_user.service.HandymanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

@@ -1,7 +1,7 @@
-package com.group.findapro.user.handyman.service;
+package com.group.findapro.user.pro_user.service;
 
-import com.group.findapro.user.handyman.model.Handyman;
-import com.group.findapro.user.handyman.repository.HandymanRepository;
+import com.group.findapro.user.pro_user.model.Handyman;
+import com.group.findapro.user.pro_user.repository.HandymanRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

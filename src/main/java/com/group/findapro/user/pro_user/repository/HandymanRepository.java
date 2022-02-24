@@ -1,6 +1,6 @@
-package com.group.findapro.user.handyman.repository;
+package com.group.findapro.user.pro_user.repository;
 
-import com.group.findapro.user.handyman.model.Handyman;
+import com.group.findapro.user.pro_user.model.Handyman;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

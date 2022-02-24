@@ -1,4 +1,4 @@
-package com.group.findapro.user.handyman.model;
+package com.group.findapro.user.pro_user.model;
 
 import com.group.findapro.user.User;
 

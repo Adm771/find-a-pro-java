@@ -1,40 +1,35 @@
 package com.group.findapro.communication.offer.model;
 
-import com.group.findapro.communication.Communication;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import java.time.LocalDate;
-import java.time.LocalTime;
+import javax.persistence.*;
 
 @Entity
-@Table(name="Offers")
-public class Offer extends Communication {
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+@Table(name = "Offers")
+public class Offer {
 
-    private long handymanId;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long offerId;
 
-    public Offer(int serviceId, LocalDate daySlot, LocalTime timeSlot, float hourlySalaryRate, String postCode, boolean active, String message, long handymanId) {
-        super(serviceId, daySlot, timeSlot, hourlySalaryRate, postCode, active, message);
-        this.handymanId = handymanId;
-    }
+    @Column(name = "offer_title")
+    private String title;
 
-    public Offer(int serviceId, LocalDate parse, int timeSlot, int hourlySalaryRate, String se1, boolean active, String painting_the_wall, long handymanId) {
-        super();
-    }
+    @Column(name = "payment")
+    private long payment;
 
-    public Offer() {
-    }
+    @Column(name = "offer_description")
+    private String description;
 
-    public long getHandymanId() {
-        return handymanId;
-    }
+    @Column(name = "published_on")
+    private java.sql.Date publishedOn;
 
-    public void setHandymanId(long handymanId) {
-        this.handymanId = handymanId;
-    }
+    @Column(name = "archived")
+    private boolean archived;
 
-    @Override
-    public void setId(long id) {
-        super.setId(id);
-    }
 }
