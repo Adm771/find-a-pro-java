@@ -1,29 +1,73 @@
 package com.group.findapro.communication.offer.controller;
 
 import com.group.findapro.communication.offer.model.Offer;
-import com.group.findapro.communication.offer.service.OfferService;
+import com.group.findapro.communication.offer.repository.OfferRepository;
+import com.group.findapro.exeptcions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
-@RequestMapping("/offers")
+@RequestMapping("/api/v1/")
 @CrossOrigin
 public class OfferController {
 
-    private OfferService offerService;
-
     @Autowired
-    public OfferController(OfferService offerService) {
-        this.offerService = offerService;
+    private OfferRepository offerRepository;
+
+
+    // GET ALL OFFERS
+    @GetMapping("offers")
+    public List<Offer> getAllOffers(){return this.offerRepository.findAll(); }
+
+    // GET OFFER BY ID
+    @GetMapping("/offer/{id}")
+    public ResponseEntity<Offer> getEmployeeById(@PathVariable(value = "id") Long offerId)
+            throws ResourceNotFoundException {
+        Offer offer = offerRepository.findById(offerId)
+                .orElseThrow(() -> new ResourceNotFoundException("Offer not found for this id :: " + offerId));
+        return ResponseEntity.ok().body(offer);
     }
 
-    @GetMapping
-    public List<Offer> getAllOffers(){
-        return offerService.getAllOffers();
+    // ADD OFFER
+    @PostMapping("offers")
+    public Offer createUser(@RequestBody Offer offer) {
+        return this.offerRepository.save(offer);
     }
 
-    @PostMapping
-    public void addOffer(@RequestBody Offer newOffer) { offerService.addOffer(newOffer); }
+    // UPDATE OFFER widziałem tutaj @Valid przed request body ale nie działa obecnie wcale ten @
+    @PutMapping("/offers/{id}")
+    public ResponseEntity<Offer> updateEmployee(@PathVariable(value = "id") Long offerId,
+                                               @RequestBody Offer userDetails) throws ResourceNotFoundException {
+        Offer offer = offerRepository.findById(offerId)
+                .orElseThrow(() -> new ResourceNotFoundException("Employee not found for this id :: " + offerId));
+
+        offer.setTitle(userDetails.getTitle());
+        offer.setDescription(userDetails.getDescription());
+        offer.setPayment(userDetails.getPayment());
+        // NIE MA OPCJI OBECNIE ZMIENIA ARCHIVED
+
+        return ResponseEntity.ok(this.offerRepository.save(offer));
+    }
+    // DELETE OFFER
+    @DeleteMapping("/offers/{id}")
+    public Map<String, Boolean> deleteUser(@PathVariable(value = "id") Long offerId)
+            throws ResourceNotFoundException {
+        Offer offer = offerRepository.findById(offerId)
+                .orElseThrow(() -> new ResourceNotFoundException("Employee not found for this id :: " + offerId));
+
+        offerRepository.delete(offer);
+        Map<String, Boolean> response = new HashMap<>();
+        response.put("deleted", Boolean.TRUE);
+        return response;
+    }
+
+
+
+
+
 }

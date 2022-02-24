@@ -1,4 +1,4 @@
-package com.group.findapro.communication.offer.model;
+package com.group.findapro.communication.review;
 
 import lombok.*;
 
@@ -10,26 +10,26 @@ import javax.persistence.*;
 @Builder
 @Getter
 @Setter
-@Table(name = "Offers")
-public class Offer {
+@Table(name = "reviews")
+public class Review {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long offerId;
+    private Long reviewId;
 
-    @Column(name = "offer_title")
+    @Column(name = "review_title")
     private String title;
 
-    @Column(name = "payment")
-    private long payment;
-
-    @Column(name = "offer_description")
+    @Column(name = "review_description")
     private String description;
 
     @Column(name = "published_on")
     private java.sql.Date publishedOn;
 
-    @Column(name = "archived")
-    private boolean archived;
+    @Column(name = "star_count")
+    private long starCount;
+
+    // łączenie tabel
+
 
 }
