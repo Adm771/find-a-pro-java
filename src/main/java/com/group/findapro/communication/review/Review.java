@@ -1,5 +1,6 @@
 package com.group.findapro.communication.review;
 
+import com.group.findapro.user.standard_user.model.User;
 import lombok.*;
 
 import javax.persistence.*;
@@ -29,6 +30,12 @@ public class Review {
     @Column(name = "star_count")
     private long starCount;
 
+    @OneToOne
+    @JoinColumn(
+            name = "user_id",
+            referencedColumnName = "userId"
+    )
+    private User user;
     // łączenie tabel
 
 

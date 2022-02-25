@@ -1,5 +1,6 @@
 package com.group.findapro.communication.offer.model;
 
+import com.group.findapro.user.standard_user.model.User;
 import lombok.*;
 
 import javax.persistence.*;
@@ -32,4 +33,10 @@ public class Offer {
     @Column(name = "archived")
     private boolean archived;
 
+    @OneToOne
+    @JoinColumn(
+            name = "user_id",
+            referencedColumnName = "userId"
+    )
+    private User user;
 }

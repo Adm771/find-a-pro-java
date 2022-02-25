@@ -1,5 +1,6 @@
 package com.group.findapro.communication.request.model;
 
+import com.group.findapro.user.standard_user.model.User;
 import lombok.*;
 
 import javax.persistence.*;
@@ -15,9 +16,12 @@ public class Request {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id",
+            updatable = false)
     private Long requestId;
 
-    @Column(name = "request_title")
+    @Column(name = "request_title",
+            columnDefinition = "VARCHAR(800)")
     private String title;
 
     @Column(name = "payment")
@@ -34,5 +38,12 @@ public class Request {
 
     @Column(name = "archived")
     private boolean archived;
+
+    @OneToOne
+    @JoinColumn(
+            name = "user_id",
+            referencedColumnName = "userId"
+    )
+    private User user;
 
 }
