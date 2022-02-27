@@ -25,4 +25,9 @@ public class RequestController {
     @PostMapping
     public void addRequest (@RequestBody Request newRequest) { requestService.addRequest(newRequest);}
 
+//    @GetMapping("/{customerId}")
+//    public List<Request> getRequestsByCustomerId(@PathVariable Long customerId){
+//        return requestService.getRequestsByCustomerId(customerId);
+//    }
+
 }

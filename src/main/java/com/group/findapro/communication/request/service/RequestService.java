@@ -17,10 +17,14 @@ public class RequestService {
         this.requestRepository = requestRepository;
     }
 
-    public List<Request> getAllRequests() {
-        return requestRepository.findAll();
+    public List<Request> getAllRequests() { return requestRepository.findAll(); }
+
+    public void addRequest(Request newRequest) {
+        System.out.println(newRequest);
+        requestRepository.save(newRequest);
     }
 
-    public void addRequest(Request newRequest) { requestRepository.save(newRequest); }
+//    public List<Request> getRequestsByCustomerId(Long customerId) { return requestRepository.findAllByCustomerId(customerId);
+//    }
 }
 

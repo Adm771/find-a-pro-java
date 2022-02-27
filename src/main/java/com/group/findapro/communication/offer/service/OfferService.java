@@ -14,15 +14,17 @@ public class OfferService {
 
     @Autowired
     public OfferService(OfferRepository offerRepository) {
-        this.offerRepository = offerRepository;
+    this.offerRepository = offerRepository;
     }
 
-    public List<Offer> getAllOffers() {
-        return offerRepository.findAll();
+    public List<Offer> getAllOffers() { return offerRepository.findAll();
     }
 
     public void addOffer(Offer newOffer) {
-        offerRepository.save(newOffer);
+    offerRepository.save(newOffer);
     }
 
+//    public List<Offer> getOffersByserviceIdAndPostCode(int serviceId, String postCode) {
+//       return offerRepository.findAllByServiceIdAndPostCode(serviceId, postCode);
+//    }
 }
