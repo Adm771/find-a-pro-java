@@ -26,7 +26,7 @@ public class OfferController {
 
     // GET OFFER BY ID
     @GetMapping("/offer/{id}")
-    public ResponseEntity<Offer> getEmployeeById(@PathVariable(value = "id") Long offerId)
+    public ResponseEntity<Offer> getOfferById(@PathVariable(value = "id") Long offerId)
             throws ResourceNotFoundException {
         Offer offer = offerRepository.findById(offerId)
                 .orElseThrow(() -> new ResourceNotFoundException("Offer not found for this id :: " + offerId));
@@ -35,30 +35,30 @@ public class OfferController {
 
     // ADD OFFER
     @PostMapping("offers")
-    public Offer createUser(@RequestBody Offer offer) {
+    public Offer createOffer(@RequestBody Offer offer) {
         return this.offerRepository.save(offer);
     }
 
     // UPDATE OFFER widziałem tutaj @Valid przed request body ale nie działa obecnie wcale ten @
     @PutMapping("/offers/{id}")
-    public ResponseEntity<Offer> updateEmployee(@PathVariable(value = "id") Long offerId,
-                                               @RequestBody Offer userDetails) throws ResourceNotFoundException {
+    public ResponseEntity<Offer> updateOffer(@PathVariable(value = "id") Long offerId,
+                                               @RequestBody Offer offerDetails) throws ResourceNotFoundException {
         Offer offer = offerRepository.findById(offerId)
-                .orElseThrow(() -> new ResourceNotFoundException("Employee not found for this id :: " + offerId));
+                .orElseThrow(() -> new ResourceNotFoundException("Offer not found for this id :: " + offerId));
 
-        offer.setTitle(userDetails.getTitle());
-        offer.setDescription(userDetails.getDescription());
-        offer.setPayment(userDetails.getPayment());
+        offer.setTitle(offerDetails.getTitle());
+        offer.setDescription(offerDetails.getDescription());
+        offer.setPayment(offerDetails.getPayment());
         // NIE MA OPCJI OBECNIE ZMIENIA ARCHIVED
 
         return ResponseEntity.ok(this.offerRepository.save(offer));
     }
     // DELETE OFFER
     @DeleteMapping("/offers/{id}")
-    public Map<String, Boolean> deleteUser(@PathVariable(value = "id") Long offerId)
+    public Map<String, Boolean> deleteOffer(@PathVariable(value = "id") Long offerId)
             throws ResourceNotFoundException {
         Offer offer = offerRepository.findById(offerId)
-                .orElseThrow(() -> new ResourceNotFoundException("Employee not found for this id :: " + offerId));
+                .orElseThrow(() -> new ResourceNotFoundException("Offer not found for this id :: " + offerId));
 
         offerRepository.delete(offer);
         Map<String, Boolean> response = new HashMap<>();

@@ -29,7 +29,7 @@ public class UserController {
 
     // GET USER BY ID
     @GetMapping("/user/{id}")
-    public ResponseEntity<User> getEmployeeById(@PathVariable(value = "id") Long userId)
+    public ResponseEntity<User> getUserById(@PathVariable(value = "id") Long userId)
             throws ResourceNotFoundException {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new ResourceNotFoundException("User not found for this id :: " + userId));
@@ -45,10 +45,10 @@ public class UserController {
 
     // UPDATE USER widziałem tutaj @Valid przed request body ale nie działa obecnie wcale ten @
     @PutMapping("/user/{id}")
-    public ResponseEntity<User> updateEmployee(@PathVariable(value = "id") Long userId,
+    public ResponseEntity<User> updateUser(@PathVariable(value = "id") Long userId,
                                                @RequestBody User userDetails) throws ResourceNotFoundException {
         User user = userRepository.findById(userId)
-                .orElseThrow(() -> new ResourceNotFoundException("Employee not found for this id :: " + userId));
+                .orElseThrow(() -> new ResourceNotFoundException("User not found for this id :: " + userId));
 
         user.setFirstName(userDetails.getFirstName());
         user.setLastName(userDetails.getLastName());
@@ -65,7 +65,7 @@ public class UserController {
     public Map<String, Boolean> deleteUser(@PathVariable(value = "id") Long userId)
             throws ResourceNotFoundException {
         User user = userRepository.findById(userId)
-                .orElseThrow(() -> new ResourceNotFoundException("Employee not found for this id :: " + userId));
+                .orElseThrow(() -> new ResourceNotFoundException("User not found for this id :: " + userId));
 
         userRepository.delete(user);
         Map<String, Boolean> response = new HashMap<>();

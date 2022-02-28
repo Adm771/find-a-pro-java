@@ -20,35 +20,35 @@ public class ReviewController {
 
     // GET ALL REVIEW
     @GetMapping("review")
-    public List<Review> getAllOffers() {
+    public List<Review> getAllReview() {
         return this.reviewRepository.findAll();
     }
 
     // GET REVIEW BY ID
     @GetMapping("/review/{id}")
-    public ResponseEntity<Review> getEmployeeById(@PathVariable(value = "id") Long reviewId)
+    public ResponseEntity<Review> getReviewById(@PathVariable(value = "id") Long reviewId)
             throws ResourceNotFoundException {
         Review review = reviewRepository.findById(reviewId)
-                .orElseThrow(() -> new ResourceNotFoundException("Offer not found for this id :: " + reviewId));
+                .orElseThrow(() -> new ResourceNotFoundException("Review not found for this id :: " + reviewId));
         return ResponseEntity.ok().body(review);
     }
 
     // ADD REVIEW
     @PostMapping("reviews")
-    public Review createUser(@RequestBody Review review) {
+    public Review createReview(@RequestBody Review review) {
         return this.reviewRepository.save(review);
     }
 
     // UPDATE REVIEW widziałem tutaj @Valid przed request body ale nie działa obecnie wcale ten @
     @PutMapping("/reviews/{id}")
-    public ResponseEntity<Review> updateEmployee(@PathVariable(value = "id") Long reviewId,
-                                                 @RequestBody Review userDetails) throws ResourceNotFoundException {
+    public ResponseEntity<Review> updateReview(@PathVariable(value = "id") Long reviewId,
+                                                 @RequestBody Review reviewDetails) throws ResourceNotFoundException {
         Review review = reviewRepository.findById(reviewId)
-                .orElseThrow(() -> new ResourceNotFoundException("Employee not found for this id :: " + reviewId));
+                .orElseThrow(() -> new ResourceNotFoundException("Review not found for this id :: " + reviewId));
 
-        review.setTitle(userDetails.getTitle());
-        review.setDescription(userDetails.getDescription());
-        review.setStarCount(userDetails.getStarCount());
+        review.setTitle(reviewDetails.getTitle());
+        review.setDescription(reviewDetails.getDescription());
+        review.setStarCount(reviewDetails.getStarCount());
 
 
         return ResponseEntity.ok(this.reviewRepository.save(review));
@@ -56,10 +56,10 @@ public class ReviewController {
 
     // DELETE REVIEW
     @DeleteMapping("/reviews/{id}")
-    public Map<String, Boolean> deleteUser(@PathVariable(value = "id") Long reviewId)
+    public Map<String, Boolean> deleteReview(@PathVariable(value = "id") Long reviewId)
             throws ResourceNotFoundException {
         Review review = reviewRepository.findById(reviewId)
-                .orElseThrow(() -> new ResourceNotFoundException("Employee not found for this id :: " + reviewId));
+                .orElseThrow(() -> new ResourceNotFoundException("Review not found for this id :: " + reviewId));
 
         reviewRepository.delete(review);
         Map<String, Boolean> response = new HashMap<>();

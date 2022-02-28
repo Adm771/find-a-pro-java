@@ -31,26 +31,26 @@ public class RequestController {
     public ResponseEntity<Request> getRequestById(@PathVariable(value = "id") Long requestId)
             throws ResourceNotFoundException {
         Request request = requestRepository.findById(requestId)
-                .orElseThrow(() -> new ResourceNotFoundException("Offer not found for this id :: " + requestId));
+                .orElseThrow(() -> new ResourceNotFoundException("Request not found for this id :: " + requestId));
         return ResponseEntity.ok().body(request);
     }
 
     // ADD REQUEST
     @PostMapping("requests")
-    public Request createUser(@RequestBody Request request) {
+    public Request createRequest(@RequestBody Request request) {
         return this.requestRepository.save(request);
     }
 
     // UPDATE REQUEST widziałem tutaj @Valid przed request body ale nie działa obecnie wcale ten @
     @PutMapping("/request/{id}")
-    public ResponseEntity<Request> updateEmployee(@PathVariable(value = "id") Long requestId,
-                                                  @RequestBody Request userDetails) throws ResourceNotFoundException {
+    public ResponseEntity<Request> updateRequest(@PathVariable(value = "id") Long requestId,
+                                                  @RequestBody Request requestDetails) throws ResourceNotFoundException {
         Request request = requestRepository.findById(requestId)
-                .orElseThrow(() -> new ResourceNotFoundException("Employee not found for this id :: " + requestId));
+                .orElseThrow(() -> new ResourceNotFoundException("Request not found for this id :: " + requestId));
 
-        request.setTitle(userDetails.getTitle());
-        request.setDescription(userDetails.getDescription());
-        request.setPayment(userDetails.getPayment());
+        request.setTitle(requestDetails.getTitle());
+        request.setDescription(requestDetails.getDescription());
+        request.setPayment(requestDetails.getPayment());
         // NIE MA OPCJI OBECNIE ZMIENIA ARCHIVED
 
         return ResponseEntity.ok(this.requestRepository.save(request));
@@ -58,10 +58,10 @@ public class RequestController {
 
     // DELETE REQUEST
     @DeleteMapping("/request/{id}")
-    public Map<String, Boolean> deleteUser(@PathVariable(value = "id") Long requestId)
+    public Map<String, Boolean> deleteRequest(@PathVariable(value = "id") Long requestId)
             throws ResourceNotFoundException {
         Request request = requestRepository.findById(requestId)
-                .orElseThrow(() -> new ResourceNotFoundException("Employee not found for this id :: " + requestId));
+                .orElseThrow(() -> new ResourceNotFoundException("Request not found for this id :: " + requestId));
 
         requestRepository.delete(request);
         Map<String, Boolean> response = new HashMap<>();
