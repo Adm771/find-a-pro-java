@@ -1,8 +1,12 @@
 package com.group.findapro.user.standard_user.model;
 
+import com.group.findapro.communication.offer.model.Offer;
+import com.group.findapro.communication.request.model.Request;
+import com.group.findapro.communication.review.Review;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @AllArgsConstructor
@@ -46,4 +50,16 @@ public class User {
 
     @Column(name = "profile_description")
     private String description;
+
+    @OneToMany(targetEntity = Offer.class, cascade = CascadeType.ALL)
+    @JoinColumn(name = "uoffer_fk", referencedColumnName = "id")
+    private List<Offer> offers;
+
+    @OneToMany(targetEntity = Review.class, cascade = CascadeType.ALL)
+    @JoinColumn(name = "ureview_fk", referencedColumnName = "id")
+    private List<Review> reviews;
+
+    @OneToMany(targetEntity = Request.class, cascade = CascadeType.ALL)
+    @JoinColumn(name = "urequest_fk", referencedColumnName = "id")
+    private List<Request> requests;
 }

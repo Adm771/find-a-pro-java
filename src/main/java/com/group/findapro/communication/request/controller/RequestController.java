@@ -22,13 +22,13 @@ public class RequestController {
 
     // GET ALL REQUEST
     @GetMapping("requests")
-    public List<Request> getAllOffers() {
+    public List<Request> getAllRequest() {
         return this.requestRepository.findAll();
     }
 
     // GET REQUEST BY ID
     @GetMapping("/request/{id}")
-    public ResponseEntity<Request> getEmployeeById(@PathVariable(value = "id") Long requestId)
+    public ResponseEntity<Request> getRequestById(@PathVariable(value = "id") Long requestId)
             throws ResourceNotFoundException {
         Request request = requestRepository.findById(requestId)
                 .orElseThrow(() -> new ResourceNotFoundException("Offer not found for this id :: " + requestId));

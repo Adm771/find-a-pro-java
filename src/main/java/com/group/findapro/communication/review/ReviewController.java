@@ -54,7 +54,7 @@ public class ReviewController {
         return ResponseEntity.ok(this.reviewRepository.save(review));
     }
 
-    // DELETE OFFER
+    // DELETE REVIEW
     @DeleteMapping("/reviews/{id}")
     public Map<String, Boolean> deleteUser(@PathVariable(value = "id") Long reviewId)
             throws ResourceNotFoundException {

@@ -20,12 +20,13 @@ public class Request {
             updatable = false)
     private Long requestId;
 
+    // ILOSC CHAR W COLUMN DEFINITION
     @Column(name = "request_title",
             columnDefinition = "VARCHAR(800)")
     private String title;
 
     @Column(name = "payment")
-    private long payment;
+    private double payment;
 
     @Column(name = "request_description")
     private String description;
@@ -33,17 +34,13 @@ public class Request {
     @Column(name = "published_on")
     private java.sql.Date publishedOn;
 
+
+
     @Column(name = "phone_number")
     private long phoneNumber;
 
     @Column(name = "archived")
     private boolean archived;
 
-    @OneToOne
-    @JoinColumn(
-            name = "user_id",
-            referencedColumnName = "userId"
-    )
-    private User user;
 
 }
