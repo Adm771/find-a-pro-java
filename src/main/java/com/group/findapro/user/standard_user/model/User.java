@@ -14,6 +14,8 @@ import java.util.List;
 @Builder
 @Getter
 @Setter
+
+// TUTAJ JEST PRZYKLAD UNIKATOWYCH CONSTRAINTSOW W JPA PO STRONIE SERVERA
 @Table(
         name = "users",
        uniqueConstraints = {
