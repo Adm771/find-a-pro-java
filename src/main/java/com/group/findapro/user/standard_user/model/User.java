@@ -54,14 +54,14 @@ public class User {
     private String description;
 
     @OneToMany(targetEntity = Offer.class, cascade = CascadeType.ALL)
-    @JoinColumn(name = "uoffer_fk", referencedColumnName = "id")
+    @JoinColumn(name = "offerId")
     private List<Offer> offers;
 
     @OneToMany(targetEntity = Review.class, cascade = CascadeType.ALL)
-    @JoinColumn(name = "ureview_fk", referencedColumnName = "id")
+    @JoinColumn(name = "reviewId")
     private List<Review> reviews;
 
     @OneToMany(targetEntity = Request.class, cascade = CascadeType.ALL)
-    @JoinColumn(name = "urequest_fk", referencedColumnName = "id")
+    @JoinColumn(name = "requestId")
     private List<Request> requests;
 }

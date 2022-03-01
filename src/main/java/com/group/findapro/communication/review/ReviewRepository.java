@@ -7,6 +7,4 @@ import java.util.List;
 
 public interface ReviewRepository extends JpaRepository<Review, Long> {
 
-    @Query("select r from Review r where r.reviewId = ?1 and r.user = ?2")
-    List<Review> findByReviewIdAndUser();
 }
