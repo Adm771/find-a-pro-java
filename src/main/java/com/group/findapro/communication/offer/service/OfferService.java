@@ -61,4 +61,5 @@ public class OfferService {
         return user.getOffers();
     }
 
+    // DTO SERVIS WITH OFFER WITH USER ID
 }

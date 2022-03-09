@@ -27,7 +27,7 @@ public class OfferController {
     public List<Offer> getAllOffers(){return this.offerService.getAllOffers(); }
 
     // GET OFFER BY ID
-    @GetMapping("/offer/{id}")
+    @GetMapping("offer/{id}")
     public ResponseEntity<Offer> getOfferById(@PathVariable(value = "id") Long offerId)
             throws ResourceNotFoundException {
         return this.offerService.getOfferById(offerId);
@@ -40,26 +40,27 @@ public class OfferController {
     }
 
     // UPDATE OFFER widziałem tutaj @Valid przed request body ale nie działa obecnie wcale ten @
-    @PutMapping("/offers/{id}")
+    @PutMapping("offers/{id}")
     public ResponseEntity<Offer> updateOffer(@PathVariable(value = "id") Long offerId,
                                                @RequestBody Offer offerDetails) throws ResourceNotFoundException {
 
         return this.offerService.updateOffer(offerId,offerDetails);
     }
     // DELETE OFFER
-    @DeleteMapping("/offers/{id}")
+    @DeleteMapping("offers/{id}")
     public Map<String, Boolean> deleteOffer(@PathVariable(value = "id") Long offerId)
             throws ResourceNotFoundException {
         return offerService.deleteOffer(offerId);
     }
 
-    @GetMapping("/users/offer/{userId}")
+    @GetMapping("users/offer/{userId}")
     public List<Offer> getOfferForUser(@PathVariable(value = "userId") Long userId)
             throws ResourceNotFoundException {
         return offerService.getOffersForUser(userId);
     }
 
-
+    // ADD OFFER WITH USER ID
+    //@PostMapping("add-off-with-user-id")
 
 
 }
