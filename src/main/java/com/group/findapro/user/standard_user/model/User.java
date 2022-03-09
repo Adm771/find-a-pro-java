@@ -46,21 +46,31 @@ public class User {
             nullable = false)
     private String password;
 
-    @Column(name = "employment")
-    private String employment;
+//    @Column(name = "employment")
+//    private String employment;
 
     @Column(name = "profile_description")
     private String description;
 
-    @OneToMany(targetEntity = Offer.class, cascade = CascadeType.ALL)
-    @JoinColumn(name = "uoffer_fk", referencedColumnName = "id")
-    private List<Offer> offers;
+//    @OneToMany(targetEntity = Offer.class, cascade = CascadeType.ALL)
+//    @JoinColumn(name = "uoffer_fk", referencedColumnName = "id")
+//    private List<Offer> offers;
+//
+////    2022-02-28 18:54:30.682 ERROR 29348 --- [           main] j.LocalContainerEntityManagerFactoryBean : Failed to initialize JPA EntityManagerFactory: Unable to map collection com.group.findapro.user.standard_user.model.User.reviews
+//    @OneToMany(targetEntity = Review.class, cascade = CascadeType.ALL)
+//    @JoinColumn(name = "ureview_fk", referencedColumnName = "id")
+//    private List<Review> reviews;
+//
+//    @OneToMany(targetEntity = Request.class, cascade = CascadeType.ALL)
+//    @JoinColumn(name = "urequest_fk", referencedColumnName = "id")
+//    private List<Request> requests;
 
-    @OneToMany(targetEntity = Review.class, cascade = CascadeType.ALL)
-    @JoinColumn(name = "ureview_fk", referencedColumnName = "id")
-    private List<Review> reviews;
-
-    @OneToMany(targetEntity = Request.class, cascade = CascadeType.ALL)
-    @JoinColumn(name = "urequest_fk", referencedColumnName = "id")
-    private List<Request> requests;
+    public User(String firstName, String lastName, long phoneNumber, String email, String password, String description) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+        this.password = password;
+        this.description = description;
+    }
 }

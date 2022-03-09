@@ -4,6 +4,8 @@ import com.group.findapro.user.standard_user.model.User;
 import lombok.*;
 
 import javax.persistence.*;
+import java.sql.Date;
+import java.time.LocalDate;
 
 @Entity
 @AllArgsConstructor
@@ -25,10 +27,27 @@ public class Review {
     private String description;
 
     @Column(name = "published_on")
-    private java.sql.Date publishedOn;
+    private LocalDate publishedOn;
 
-    @Column(name = "star_count")
-    private long starCount;
+    //rating better?
+    @Column(name = "rating")
+    private long rating;
 
+    //added
+    @Column(name = "user_id",
+            updatable = false)
+    private Long userId;
 
+    @Column(name = "handyman_id"
+    )
+    private Long handymanId;
+
+    public Review(String title, String description, LocalDate publishedOn, long rating, Long userId, Long handymanId) {
+        this.title = title;
+        this.description = description;
+        this.publishedOn = publishedOn;
+        this.rating = rating;
+        this.userId = userId;
+        this.handymanId = handymanId;
+    }
 }

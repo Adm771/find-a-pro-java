@@ -21,6 +21,13 @@ public class RequestService {
         return requestRepository.findAll();
     }
 
-    public void addRequest(Request newRequest) { requestRepository.save(newRequest); }
+    public void addRequest(Request newRequest) {
+        requestRepository.save(newRequest);
+    }
+
+    public List<Request> getRequestsByUserId(Long userId) {
+        return requestRepository.findAllByUserId(userId);
+    }
+
 }
 

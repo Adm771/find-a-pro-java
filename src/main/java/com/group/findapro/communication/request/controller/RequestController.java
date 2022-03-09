@@ -2,6 +2,7 @@ package com.group.findapro.communication.request.controller;
 
 import com.group.findapro.communication.request.model.Request;
 import com.group.findapro.communication.request.repository.RequestRepository;
+import com.group.findapro.communication.request.service.RequestService;
 import com.group.findapro.exeptcions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -13,11 +14,14 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/v1/")
-@CrossOrigin
+@CrossOrigin(origins = "*")
 public class RequestController {
 
     @Autowired
     private RequestRepository requestRepository;
+
+    @Autowired
+    RequestService requestService;
 
 
     // GET ALL REQUEST
@@ -67,5 +71,11 @@ public class RequestController {
         Map<String, Boolean> response = new HashMap<>();
         response.put("deleted", Boolean.TRUE);
         return response;
+    }
+
+    @GetMapping("/requests/{userId}")
+    public List<Request> getRequestsByUserId(@PathVariable(value = "userId") Long userId)
+            throws ResourceNotFoundException{
+        return requestService.getRequestsByUserId(userId);
     }
 }

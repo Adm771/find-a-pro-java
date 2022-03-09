@@ -15,6 +15,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/v1/")
+@CrossOrigin(origins = "http://localhost:3000")
 public class UserController {
 
     @Autowired
@@ -53,7 +54,7 @@ public class UserController {
         user.setFirstName(userDetails.getFirstName());
         user.setLastName(userDetails.getLastName());
         user.setDescription(userDetails.getDescription());
-        user.setEmployment(userDetails.getEmployment());
+//        user.setEmployment(userDetails.getEmployment());
         user.setPhoneNumber(userDetails.getPhoneNumber());
         user.setEmail(userDetails.getEmail());
         user.setPassword(userDetails.getPassword());

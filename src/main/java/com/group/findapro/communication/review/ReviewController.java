@@ -11,16 +11,19 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/v1/")
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:3000")
 public class ReviewController {
 
     @Autowired
     private ReviewRepository reviewRepository;
 
+    @Autowired
+    public ReviewService reviewService;
 
-    // GET ALL REVIEW
-    @GetMapping("review")
-    public List<Review> getAllReview() {
+
+    // GET ALL REVIEWS
+    @GetMapping("reviews")
+    public List<Review> getAllReviews() {
         return this.reviewRepository.findAll();
     }
 
@@ -48,7 +51,7 @@ public class ReviewController {
 
         review.setTitle(reviewDetails.getTitle());
         review.setDescription(reviewDetails.getDescription());
-        review.setStarCount(reviewDetails.getStarCount());
+        review.setRating(reviewDetails.getRating());
 
 
         return ResponseEntity.ok(this.reviewRepository.save(review));
@@ -65,5 +68,11 @@ public class ReviewController {
         Map<String, Boolean> response = new HashMap<>();
         response.put("deleted", Boolean.TRUE);
         return response;
+    }
+
+    @GetMapping("/reviews/{userId}")
+    public List<Review> getReviewsByUserId(@PathVariable(value = "userId") Long userId)
+            throws ResourceNotFoundException{
+        return reviewService.getReviewsByUserId(userId);
     }
 }
