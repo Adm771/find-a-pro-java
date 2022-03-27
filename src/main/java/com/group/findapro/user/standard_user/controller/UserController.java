@@ -1,10 +1,8 @@
 package com.group.findapro.user.standard_user.controller;
 
-
-import com.group.findapro.exeptcions.ResourceNotFoundException;
-
 import com.group.findapro.user.standard_user.model.User;
-import com.group.findapro.user.standard_user.repository.UserRepository;
+import com.group.findapro.user.standard_user.service.UserService;
+import com.group.findapro.exeptcions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,60 +13,49 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/v1/")
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "*")
 public class UserController {
 
-    @Autowired
-    private UserRepository userRepository;
+    private UserService userService;
 
+    @Autowired
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
 
     // GET ALL USERS
     @GetMapping("users")
     public List<User> getAllUsers() {
-        return this.userRepository.findAll();
+        return this.userService.getAllUsers();
     }
 
     // GET USER BY ID
-    @GetMapping("/user/{id}")
+    @GetMapping("/users/{id}")
     public ResponseEntity<User> getUserById(@PathVariable(value = "id") Long userId)
             throws ResourceNotFoundException {
-        User user = userRepository.findById(userId)
-                .orElseThrow(() -> new ResourceNotFoundException("User not found for this id :: " + userId));
+        User user = userService.getUserById(userId);
         return ResponseEntity.ok().body(user);
     }
 
     // ADD USER
     @PostMapping("users")
-    public User createUser(@RequestBody User user) {
-        return this.userRepository.save(user);
+    public void createUser(@RequestBody User user) {
+        this.userService.addUser(user);
     }
 
-
-    // UPDATE USER widziałem tutaj @Valid przed request body ale nie działa obecnie wcale ten @
     @PutMapping("/user/{id}")
     public ResponseEntity<User> updateUser(@PathVariable(value = "id") Long userId,
-                                               @RequestBody User userDetails) throws ResourceNotFoundException {
-        User user = userRepository.findById(userId)
-                .orElseThrow(() -> new ResourceNotFoundException("User not found for this id :: " + userId));
+                                               @RequestBody User user) throws ResourceNotFoundException {
+        user = userService.updateUser(userId, user);
 
-        user.setFirstName(userDetails.getFirstName());
-        user.setLastName(userDetails.getLastName());
-        user.setDescription(userDetails.getDescription());
-//        user.setEmployment(userDetails.getEmployment());
-        user.setPhoneNumber(userDetails.getPhoneNumber());
-        user.setEmail(userDetails.getEmail());
-        user.setPassword(userDetails.getPassword());
-
-        return ResponseEntity.ok(this.userRepository.save(user));
+        return ResponseEntity.ok(user);
     }
+
     // DELETE USER
     @DeleteMapping("/users/{id}")
     public Map<String, Boolean> deleteUser(@PathVariable(value = "id") Long userId)
             throws ResourceNotFoundException {
-        User user = userRepository.findById(userId)
-                .orElseThrow(() -> new ResourceNotFoundException("User not found for this id :: " + userId));
-
-        userRepository.delete(user);
+        userService.deleteUser(userId);
         Map<String, Boolean> response = new HashMap<>();
         response.put("deleted", Boolean.TRUE);
         return response;

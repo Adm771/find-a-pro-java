@@ -1,5 +1,7 @@
-package com.group.findapro.category;
+package com.group.findapro.category.controller;
 
+import com.group.findapro.category.model.ServiceCategory;
+import com.group.findapro.category.service.ServiceCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,6 +27,4 @@ public class ServiceCategoryController {
        return serviceCategoryService.getAllServices();
     }
 
-    public ServiceCategoryController() {
-    }
 }

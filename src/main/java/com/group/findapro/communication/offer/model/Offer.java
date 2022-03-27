@@ -4,9 +4,7 @@ import com.group.findapro.user.standard_user.model.User;
 import lombok.*;
 
 import javax.persistence.*;
-import java.sql.Date;
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Entity
 @AllArgsConstructor
@@ -14,14 +12,15 @@ import java.util.List;
 @Builder
 @Getter
 @Setter
-@Table(name = "Offers")
+@Table(name = "offers")
 public class Offer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long offerId;
 
-    @Column(name = "offer_title")
+    @Column(name = "offer_title",
+            columnDefinition = "VARCHAR(100)")
     private String title;
 
     @Column(name = "payment")
@@ -36,30 +35,23 @@ public class Offer {
     @Column(name = "archived")
     private boolean archived;
 
-//    @OneToOne
-//    @JoinColumn(
-//            name = "user_id",
-//            referencedColumnName = "userId"
-//    )
-//    private User user;
-
-    // added
-    @ElementCollection
-    public List<Integer> serviceCategoryId;
-
-    // temporary
-    private long handymanId;
+    private int serviceCategoryId;
 
     private String postCode;
 
-    public Offer(String title, double payment, String description, LocalDateTime publishedOn, boolean archived, List<Integer> serviceCategoryId, long handymanId, String postCode) {
+    @OneToOne(mappedBy = "offer")
+    private User user;
+
+    public Offer(String title, double payment, String description, LocalDateTime publishedOn, int serviceCategoryId, String postCode) {
         this.title = title;
         this.payment = payment;
         this.description = description;
         this.publishedOn = publishedOn;
-        this.archived = archived;
         this.serviceCategoryId = serviceCategoryId;
-        this.handymanId = handymanId;
         this.postCode = postCode;
+    }
+
+    public boolean getArchived() {
+        return this.archived;
     }
 }

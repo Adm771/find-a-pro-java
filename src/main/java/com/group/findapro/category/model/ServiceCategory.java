@@ -1,4 +1,4 @@
-package com.group.findapro.category;
+package com.group.findapro.category.model;
 
 import lombok.*;
 
@@ -12,11 +12,10 @@ import javax.persistence.Table;
 @Builder
 @Getter
 @Setter
-@Table(name = "Services")
+@Table(name = "services")
 public class ServiceCategory {
 
     @Id
-    private int id;
+    private int serviceId;
     private String name;
-
 }

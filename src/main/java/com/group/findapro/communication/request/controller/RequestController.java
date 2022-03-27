@@ -18,62 +18,48 @@ import java.util.Map;
 public class RequestController {
 
     @Autowired
-    private RequestRepository requestRepository;
-
-    @Autowired
-    RequestService requestService;
-
+    private RequestService requestService;
 
     // GET ALL REQUEST
-    @GetMapping("requests")
+    @GetMapping("/requests")
     public List<Request> getAllRequest() {
-        return this.requestRepository.findAll();
+        return this.requestService.getAllRequests();
     }
 
     // GET REQUEST BY ID
-    @GetMapping("/request/{id}")
+    @GetMapping("/requests/{id}")
     public ResponseEntity<Request> getRequestById(@PathVariable(value = "id") Long requestId)
             throws ResourceNotFoundException {
-        Request request = requestRepository.findById(requestId)
-                .orElseThrow(() -> new ResourceNotFoundException("Request not found for this id :: " + requestId));
+        Request request = requestService.getRequestById(requestId);
         return ResponseEntity.ok().body(request);
     }
 
     // ADD REQUEST
-    @PostMapping("requests")
-    public Request createRequest(@RequestBody Request request) {
-        return this.requestRepository.save(request);
+    @PostMapping("/requests")
+    public void createRequest(@RequestBody Request newRequest) {
+        this.requestService.addRequest(newRequest);
     }
 
-    // UPDATE REQUEST widziałem tutaj @Valid przed request body ale nie działa obecnie wcale ten @
-    @PutMapping("/request/{id}")
+    // UPDATE REQUEST
+    @PutMapping("/requests/{id}")
     public ResponseEntity<Request> updateRequest(@PathVariable(value = "id") Long requestId,
-                                                  @RequestBody Request requestDetails) throws ResourceNotFoundException {
-        Request request = requestRepository.findById(requestId)
-                .orElseThrow(() -> new ResourceNotFoundException("Request not found for this id :: " + requestId));
+                                                  @RequestBody Request request) throws ResourceNotFoundException {
+        request = requestService.updateRequest(requestId, request);
 
-        request.setTitle(requestDetails.getTitle());
-        request.setDescription(requestDetails.getDescription());
-        request.setPayment(requestDetails.getPayment());
-        // NIE MA OPCJI OBECNIE ZMIENIA ARCHIVED
-
-        return ResponseEntity.ok(this.requestRepository.save(request));
+        return ResponseEntity.ok(request);
     }
 
     // DELETE REQUEST
-    @DeleteMapping("/request/{id}")
-    public Map<String, Boolean> deleteRequest(@PathVariable(value = "id") Long requestId)
+    @DeleteMapping("/requests/{id}")
+    public ResponseEntity<Boolean> deleteRequest(@PathVariable(value = "id") Long requestId)
             throws ResourceNotFoundException {
-        Request request = requestRepository.findById(requestId)
-                .orElseThrow(() -> new ResourceNotFoundException("Request not found for this id :: " + requestId));
 
-        requestRepository.delete(request);
-        Map<String, Boolean> response = new HashMap<>();
-        response.put("deleted", Boolean.TRUE);
-        return response;
+        requestService.deleteRequest(requestId);
+        return ResponseEntity.ok(true);
     }
 
-    @GetMapping("/requests/{userId}")
+    // GET REQUEST BY USER ID
+    @GetMapping("/requests/user/{userId}")
     public List<Request> getRequestsByUserId(@PathVariable(value = "userId") Long userId)
             throws ResourceNotFoundException{
         return requestService.getRequestsByUserId(userId);

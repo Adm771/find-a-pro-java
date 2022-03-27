@@ -1,5 +1,7 @@
-package com.group.findapro.category;
+package com.group.findapro.category.service;
 
+import com.group.findapro.category.repository.ServiceCategoryRepository;
+import com.group.findapro.category.model.ServiceCategory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +21,4 @@ public class ServiceCategoryService {
 
     public void addService(ServiceCategory newService) { serviceCategoryRepository.save(newService); }
 
-    public ServiceCategoryService() {
-    }
 }
