@@ -56,8 +56,9 @@ public class FindAPro {
             serviceCategoryService.addService(new ServiceCategory(33, "drilling"));
             serviceCategoryService.addService(new ServiceCategory(32, "plumbing"));
 
-            offerRepository.save(Offer.builder().title("wall painting and wall drilling").payment(33.00).description("wall painting and wall drilling").publishedOn(LocalDateTime.now()).serviceCategoryId(34).postCode("SE1").build());
-            userRepository.save(User.builder().firstName("Harry").lastName("Carrick").phoneNumber(06771223452L).email("mynameisharry@gmail.co.uk").password("mynameisharry").description("wall painting and wall drilling").build());
+            Offer offer1 = Offer.builder().title("wall painting and wall drilling").payment(33.00).description("wall painting and wall drilling").publishedOn(LocalDateTime.now()).serviceCategoryId(34).postCode("SE1").build();
+            User user1 = User.builder().firstName("Harry").lastName("Carrick").phoneNumber(06771223452L).email("mynameisharry@gmail.co.uk").password("mynameisharry").description("wall painting and wall drilling").offer(offer1).build();
+            userRepository.save(user1);
         };
     }
 }

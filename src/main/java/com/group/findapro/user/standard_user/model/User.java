@@ -44,7 +44,7 @@ public class User {
     @Column(name = "profile_description")
     private String description;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "offer_id", referencedColumnName = "offerId")
     private Offer offer;
 
